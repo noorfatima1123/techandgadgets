@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blog — BlogWeb</title>
+    <link href="output.css" rel="stylesheet" />
+</head>
+
+<body class="bg-white text-gray-800 font-sans">
+
+    <!-- Navbar -->
+    <header class="shadow-md bg-white sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+            <h1 class="text-2xl font-bold text-indigo-600">BW</h1>
+            <nav class="space-x-6 text-gray-700 font-medium">
+                <a href="index.html" class="hover:text-indigo-500">Home</a>
+                <a href="about.html" class="hover:text-indigo-500">About</a>
+                <a href="blog.html" class="hover:text-indigo-500">Blog</a>
+                <a href="contact.html" class="hover:text-indigo-500">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Blog Posts -->
+    <section class="py-16 px-6 bg-gray-50">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-4xl font-bold text-center text-indigo-700 mb-12">Latest Blogs</h2>
+            <div class="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
+
+                <!-- Blog Card 1 -->
+                <div class="bg-white shadow rounded-xl overflow-hidden">
+                    <img src="https://picsum.photos/600/400?random=5" alt="Random Image"
+                        class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-indigo-600 mb-2">Mastering Laravel: Beginner to Pro</h3>
+                        <p class="text-gray-600 text-sm mb-4">Learn the fundamentals of Laravel and start building
+                            real-world applications today.</p>
+                        <a href="post.html" class="text-indigo-500 hover:underline text-sm font-medium">Read More →</a>
+                    </div>
+                </div>
+
+                <!-- Blog Card 2 -->
+                <div class="bg-white shadow rounded-xl overflow-hidden">
+                    <img src="https://picsum.photos/600/400?random=4" alt="Random Image"
+                        class="w-full h-48 object-cover">
+
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-indigo-600 mb-2">Why Blogging Still Matters in 2025</h3>
+                        <p class="text-gray-600 text-sm mb-4">Blogging continues to be a powerful medium. Here’s why you
+                            should start today.</p>
+                        <a href="post.html" class="text-indigo-500 hover:underline text-sm font-medium">Read More →</a>
+                    </div>
+                </div>
+
+                <!-- Blog Card 3 -->
+                <div class="bg-white shadow rounded-xl overflow-hidden">
+                    <img src="https://picsum.photos/600/400?random=3" alt="Random Image"
+                        class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-indigo-600 mb-2">Top 5 Web Development Trends</h3>
+                        <p class="text-gray-600 text-sm mb-4">Stay ahead of the curve with these game-changing trends in
+                            the dev world.</p>
+                        <a href="post.html" class="text-indigo-500 hover:underline text-sm font-medium">Read More →</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-100 py-6 mt-10">
+        <div class="text-center text-gray-600 text-sm">
+            © 2025 BlogWeb. Made with love by Hania Khan.
+        </div>
+    </footer>
+</body>
+
+</html>
