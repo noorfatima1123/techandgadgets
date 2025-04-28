@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sign Up</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: sans-serif;
+            background-color: #f7f7f7;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .signup-container {
+            background-color: #fff;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+        .signup-container h2 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+        .form-group {
+            margin-bottom: 0.75rem;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.25rem;
+            color: #555;
+            font-size: 0.85rem;
+        }
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group input[type="password"] {
+            width: calc(100% - 0.75rem);
+            padding: 0.6rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+        .form-group input[type="text"]:focus,
+        .form-group input[type="email"]:focus,
+        .form-group input[type="password"]:focus {
+            border-color: #6366f1;
+            outline: none;
+            box-shadow: 0 0 0 0.2rem rgba(99, 102, 241, 0.25);
+        }
+        .submit-button {
+            background-color: #6366f1;
+            color: #fff;
+            padding: 0.6rem 1.2rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            width: 100%;
+            transition: background-color 0.2s ease;
+        }
+        .submit-button:hover {
+            background-color: #4f46e5;
+        }
+        .separator {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: #777;
+            margin: 1rem 0;
+            font-size: 0.8rem;
+        }
+        .separator::before,
+        .separator::after {
+            content: '';
+            flex-grow: 1;
+            background-color: #ddd;
+            height: 1px;
+            margin: 0 0.5rem;
+        }
+        .login-link {
+            text-align: center;
+            margin-top: 1rem;
+            font-size: 0.8rem;
+            color: #555;
+        }
+        .login-link a {
+            color: #6366f1;
+            text-decoration: none;
+        }
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+        .error-message {
+            color: red;
+            font-size: 0.75rem;
+            margin-top: 0.15rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="signup-container">
+        <h2>Sign Up</h2>
+
+        <form id="signupForm">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required>
+                <div id="usernameError" class="error-message"></div>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+                <div id="emailError" class="error-message"></div>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+                <div id="passwordError" class="error-message"></div>
+            </div>
+            <div class="form-group">
+                <label for="confirmPassword">Confirm Password</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" required>
+                <div id="confirmPasswordError" class="error-message"></div>
+            </div>
+            <button type="submit" class="submit-button">Create Account</button>
+        </form>
+
+        <div class="separator">Or</div>
+
+        <button class="submit-button">
+            Sign up with Google
+        </button>
+
+        <div class="login-link">
+            Already have an account? <a href="login.html">Log in</a>
+        </div>
+    </div>
+
+    <script>
+        // Basic form validation
+        document.addEventListener('DOMContentLoaded', function() {
+            const signupForm = document.getElementById('signupForm');
+            const usernameInput = document.getElementById('username');
+            const emailInput = document.getElementById('email');
+            const passwordInput = document.getElementById('password');
+            const confirmPasswordInput = document.getElementById('confirmPassword');
+            const usernameError = document.getElementById('usernameError');
+            const emailError = document.getElementById('emailError');
+            const passwordError = document.getElementById('passwordError');
+            const confirmPasswordError = document.getElementById('confirmPasswordError');
+
+            signupForm.addEventListener('submit', function(event) {
+                let isValid = true;
+
+                if (usernameInput.value.trim() === '') {
+                    usernameError.textContent = 'Username is required.';
+                    isValid = false;
+                } else {
+                    usernameError.textContent = '';
+                }
+
+                if (emailInput.value.trim() === '') {
+                    emailError.textContent = 'Email is required.';
+                    isValid = false;
+                } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value)) {
+                    emailError.textContent = 'Invalid email format.';
+                    isValid = false;
+                } else {
+                    emailError.textContent = '';
+                }
+
+                if (passwordInput.value === '') {
+                    passwordError.textContent = 'Password is required.';
+                    isValid = false;
+                } else if (passwordInput.value.length < 6) {
+                    passwordError.textContent = 'Password must be at least 6 characters long.';
+                    isValid = false;
+                } else {
+                    passwordError.textContent = '';
+                }
+
+                if (confirmPasswordInput.value === '') {
+                    confirmPasswordError.textContent = 'Confirm password is required.';
+                    isValid = false;
+                } else if (confirmPasswordInput.value !== passwordInput.value) {
+                    confirmPasswordError.textContent = 'Passwords do not match.';
+                    isValid = false;
+                } else {
+                    confirmPasswordError.textContent = '';
+                }
+
+                if (!isValid) {
+                    event.preventDefault();
+                } else {
+                    console.log('Form submitted!');
+                    // In a real application, you would submit the form data
+                }
+            });
+        });
+    </script>
+</body>
+</html>

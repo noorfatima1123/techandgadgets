@@ -8,6 +8,169 @@
     <link href="output.css" rel="stylesheet" />
     <style>
         /* Existing styles */
+        /* Mobile Menu Styles */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease-out;
+        }
+
+        .mobile-menu.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .mobile-menu-content {
+            width: 90%;
+            max-width: 500px;
+            text-align: center;
+            transform: translateY(20px);
+            transition: transform 0.4s ease;
+        }
+
+        .mobile-menu.active .mobile-menu-content {
+            transform: translateY(0);
+        }
+
+        .mobile-menu nav {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .mobile-menu a {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .mobile-menu a:hover {
+            color: #818cf8;
+        }
+
+        .mobile-menu a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: #818cf8;
+            transition: width 0.3s ease;
+        }
+
+        .mobile-menu a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-contact-info {
+            margin-top: 3rem;
+            padding-top: 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .mobile-contact-info h3 {
+            color: #818cf8;
+            font-size: 1.25rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .mobile-contact-info p {
+            color: #e5e7eb;
+            margin-bottom: 1rem;
+        }
+
+        .mobile-contact-info a {
+            color: #818cf8;
+            font-size: 1rem;
+        }
+
+        .close-menu-btn {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .close-menu-btn:hover {
+            transform: rotate(90deg);
+            color: #818cf8;
+        }
+
+        .hamburger-btn {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+        }
+
+        .hamburger-icon {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: #4f46e5;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .hamburger-icon::before,
+        .hamburger-icon::after {
+            content: '';
+            position: absolute;
+            width: 24px;
+            height: 2px;
+            background: #4f46e5;
+            transition: all 0.3s ease;
+        }
+
+        .hamburger-icon::before {
+            top: -6px;
+        }
+
+        .hamburger-icon::after {
+            top: 6px;
+        }
+
+        .hamburger-btn {
+            display: block;
+        }
+
+        /* Hamburger icon transformations */
+        .hamburger-btn.is-active .hamburger-icon {
+            transform: rotate(45deg);
+            background: white;
+        }
+
+        .hamburger-btn.is-active .hamburger-icon::before {
+            transform: rotate(-90deg) translate(-6px, 0);
+            background: white;
+        }
+
+        .hamburger-btn.is-active .hamburger-icon::after {
+            opacity: 0;
+        }
+
         #hero {
             background-size: cover;
             background-position: center;
@@ -31,254 +194,288 @@
             display: none;
         }
 
-   /* Dark mode styles */
-body.dark-mode {
-    background-color: #121212;
-    color: #e0e0e0;
-    transition: background-color 0.5s ease, color 0.5s ease;
-}
-
-body.dark-mode header {
-    background-color: #1e1e1e;
-    color: #e0e0e0;
-    transition: background-color 0.5s ease, color 0.5s ease;
-}
-
-body.dark-mode nav a {
-    color: #bbb;
-    transition: color 0.3s ease;
-}
-
-body.dark-mode nav a.text-indigo-600 {
-    color: #7f9cf5;
-}
-
-body.dark-mode nav a:hover {
-    color: #a3bffa;
-}
-
-body.dark-mode .hero-overlay {
-    background: rgba(18, 18, 18, 0.85);
-    backdrop-filter: blur(2px);
-    transition: background 0.3s ease;
-}
-
-body.dark-mode #hero {
-    filter: brightness(0.85);
-    transition: filter 0.5s ease;
-}
-
-/* Features section background */
-body.dark-mode section.py-16 {
-    background-color: #1e1e1e;
-    transition: background-color 0.5s ease;
-}
-#mode-toggle-container {
-    position: fixed; /* Fixes the position */
-    left: 1rem; /* Moves it to the left */
-    bottom: 3rem; /* Adjusts the position above the "Back to Top" button */
-    z-index: 100; /* Ensures it's above other content */
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    user-select: none;
-}
-/* Common Styles */
-body {
-    font-family: Arial, sans-serif;
-    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
-}
-
-/* Dark Mode Styles */
-@media (prefers-color-scheme: dark) {
-    body {
-        background-color: #121212; /* Dark background */
-        color: white; /* Light text */
-    }
-
-    #explore-button {
-        position: relative;
-        padding: 10px 20px;
-        font-size: 18px;
-        cursor: pointer;
-        background-color: #007bff; /* Blue button */
-        color: white;
-        border: none;
-        border-radius: 5px;
-        overflow: hidden;
-        z-index: 1;
-        transition: transform 0.3s ease;
-    }
-
-    /* Container for Image Behind the Button */
-    #explore-button .image-container {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-size: cover;
-        background-position: center;
-        opacity: 0; /* Initially hidden */
-        transition: opacity 1s ease-in-out;
-    }
-
-    /* When the Button Becomes Active */
-    #explore-button.active .image-container {
-        opacity: 1; /* Show image */
-        animation: slideIn 2s forwards; /* Animation when it appears */
-    }
-
-    /* Keyframe Animation to Slide Image in */
-    @keyframes slideIn {
-        0% {
-            transform: translateX(100%); /* Start from the right (outside) */
+        /* Dark mode styles */
+        body.dark-mode {
+            background-color: #121212;
+            color: #e0e0e0;
+            transition: background-color 0.5s ease, color 0.5s ease;
         }
-        100% {
-            transform: translateX(0); /* End at the original position */
+
+        body.dark-mode header {
+            background-color: #1e1e1e;
+            color: #e0e0e0;
+            transition: background-color 0.5s ease, color 0.5s ease;
         }
-    }
 
-    /* Slight Button Lift Effect */
-    #explore-button.active {
-        transform: translateY(-10px); /* Lift button up */
-    }
-
-    /* Adjusting Background Images in the Button */
-    #explore-button.active .image-container {
-        background-image: url('path/to/your/dark-mode-image-1.jpg'); /* Default dark mode image */
-    }
-}
-
-/* Light Mode Styles */
-@media (prefers-color-scheme: light) {
-    body {
-        background-color: #f4f4f4; /* Light background */
-        color: #333; /* Dark text */
-    }
-
-    #explore-button {
-        position: relative;
-        padding: 10px 20px;
-        font-size: 18px;
-        cursor: pointer;
-        background-color: #007bff; /* Blue button */
-        color: white;
-        border: none;
-        border-radius: 5px;
-        overflow: hidden;
-        z-index: 1;
-        transition: transform 0.3s ease;
-    }
-
-    /* Container for Image Behind the Button */
-    #explore-button .image-container {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-size: cover;
-        background-position: center;
-        opacity: 0; /* Initially hidden */
-        transition: opacity 1s ease-in-out;
-    }
-
-    /* When the Button Becomes Active */
-    #explore-button.active .image-container {
-        opacity: 1; /* Show image */
-        animation: slideIn 2s forwards; /* Animation when it appears */
-    }
-
-    /* Keyframe Animation to Slide Image in */
-    @keyframes slideIn {
-        0% {
-            transform: translateX(100%); /* Start from the right (outside) */
+        body.dark-mode nav a {
+            color: #bbb;
+            transition: color 0.3s ease;
         }
-        100% {
-            transform: translateX(0); /* End at the original position */
+
+        body.dark-mode nav a.text-indigo-600 {
+            color: #7f9cf5;
         }
-    }
 
-    /* Slight Button Lift Effect */
-    #explore-button.active {
-        transform: translateY(-10px); /* Lift button up */
-    }
+        body.dark-mode nav a:hover {
+            color: #a3bffa;
+        }
 
-    /* Adjusting Background Images in the Button */
-    #explore-button.active .image-container {
-        background-image: url('path/to/your/light-mode-image-1.jpg'); /* Default light mode image */
-    }
-}
+        body.dark-mode .hero-overlay {
+            background: rgba(18, 18, 18, 0.85);
+            backdrop-filter: blur(2px);
+            transition: background 0.3s ease;
+        }
+
+        body.dark-mode #hero {
+            filter: brightness(0.85);
+            transition: filter 0.5s ease;
+        }
+
+        /* Features section background */
+        body.dark-mode section.py-16 {
+            background-color: #1e1e1e;
+            transition: background-color 0.5s ease;
+        }
+
+        #mode-toggle-container {
+            position: fixed;
+            /* Fixes the position */
+            left: 1rem;
+            /* Moves it to the left */
+            bottom: 3rem;
+            /* Adjusts the position above the "Back to Top" button */
+            z-index: 100;
+            /* Ensures it's above other content */
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            user-select: none;
+        }
+
+        /* Common Styles */
+        body {
+            font-family: Arial, sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            /* Smooth transition */
+        }
+
+        /* Dark Mode Styles */
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: #121212;
+                /* Dark background */
+                color: white;
+                /* Light text */
+            }
+
+            #explore-button {
+                position: relative;
+                padding: 10px 20px;
+                font-size: 18px;
+                cursor: pointer;
+                background-color: #007bff;
+                /* Blue button */
+                color: white;
+                border: none;
+                border-radius: 5px;
+                overflow: hidden;
+                z-index: 1;
+                transition: transform 0.3s ease;
+            }
+
+            /* Container for Image Behind the Button */
+            #explore-button .image-container {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-size: cover;
+                background-position: center;
+                opacity: 0;
+                /* Initially hidden */
+                transition: opacity 1s ease-in-out;
+            }
+
+            /* When the Button Becomes Active */
+            #explore-button.active .image-container {
+                opacity: 1;
+                /* Show image */
+                animation: slideIn 2s forwards;
+                /* Animation when it appears */
+            }
+
+            /* Keyframe Animation to Slide Image in */
+            @keyframes slideIn {
+                0% {
+                    transform: translateX(100%);
+                    /* Start from the right (outside) */
+                }
+
+                100% {
+                    transform: translateX(0);
+                    /* End at the original position */
+                }
+            }
+
+            /* Slight Button Lift Effect */
+            #explore-button.active {
+                transform: translateY(-10px);
+                /* Lift button up */
+            }
+
+            /* Adjusting Background Images in the Button */
+            #explore-button.active .image-container {
+                background-image: url('path/to/your/dark-mode-image-1.jpg');
+                /* Default dark mode image */
+            }
+        }
+
+        /* Light Mode Styles */
+        @media (prefers-color-scheme: light) {
+            body {
+                background-color: #f4f4f4;
+                /* Light background */
+                color: #333;
+                /* Dark text */
+            }
+
+            #explore-button {
+                position: relative;
+                padding: 10px 20px;
+                font-size: 18px;
+                cursor: pointer;
+                background-color: #007bff;
+                /* Blue button */
+                color: white;
+                border: none;
+                border-radius: 5px;
+                overflow: hidden;
+                z-index: 1;
+                transition: transform 0.3s ease;
+            }
+
+            /* Container for Image Behind the Button */
+            #explore-button .image-container {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-size: cover;
+                background-position: center;
+                opacity: 0;
+                /* Initially hidden */
+                transition: opacity 1s ease-in-out;
+            }
+
+            /* When the Button Becomes Active */
+            #explore-button.active .image-container {
+                opacity: 1;
+                /* Show image */
+                animation: slideIn 2s forwards;
+                /* Animation when it appears */
+            }
+
+            /* Keyframe Animation to Slide Image in */
+            @keyframes slideIn {
+                0% {
+                    transform: translateX(100%);
+                    /* Start from the right (outside) */
+                }
+
+                100% {
+                    transform: translateX(0);
+                    /* End at the original position */
+                }
+            }
+
+            /* Slight Button Lift Effect */
+            #explore-button.active {
+                transform: translateY(-10px);
+                /* Lift button up */
+            }
+
+            /* Adjusting Background Images in the Button */
+            #explore-button.active .image-container {
+                background-image: url('path/to/your/light-mode-image-1.jpg');
+                /* Default light mode image */
+            }
+        }
 
 
 
-/* Feature cards */
-body.dark-mode .p-6.shadow-lg.rounded-xl {
-    background-color: #2c2c2c;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
-    transition: background-color 0.5s ease, box-shadow 0.5s ease;
-}
+        /* Feature cards */
+        body.dark-mode .p-6.shadow-lg.rounded-xl {
+            background-color: #2c2c2c;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+            transition: background-color 0.5s ease, box-shadow 0.5s ease;
+        }
 
-body.dark-mode .p-6.shadow-lg.rounded-xl:hover {
-    background-color: #3a3a3a;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.8);
-}
+        body.dark-mode .p-6.shadow-lg.rounded-xl:hover {
+            background-color: #3a3a3a;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.8);
+        }
 
-/* Feature card text */
-body.dark-mode .p-6.shadow-lg.rounded-xl h3 {
-    color: #a5b4fc; /* lighter indigo */
-}
+        /* Feature card text */
+        body.dark-mode .p-6.shadow-lg.rounded-xl h3 {
+            color: #a5b4fc;
+            /* lighter indigo */
+        }
 
-body.dark-mode .p-6.shadow-lg.rounded-xl p {
-    color: #ccc;
-}
+        body.dark-mode .p-6.shadow-lg.rounded-xl p {
+            color: #ccc;
+        }
 
-/* Dark mode text strips */
-body.dark-mode .text-strip {
-    /* Optional tweaks */
-}
+        /* Dark mode text strips */
+        body.dark-mode .text-strip {
+            /* Optional tweaks */
+        }
 
-/* Dark mode images: add filter for images in hero and features */
-body.dark-mode #hero,
-body.dark-mode section.py-16 {
-    filter: brightness(0.85);
-    transition: filter 0.5s ease;
-}
+        /* Dark mode images: add filter for images in hero and features */
+        body.dark-mode #hero,
+        body.dark-mode section.py-16 {
+            filter: brightness(0.85);
+            transition: filter 0.5s ease;
+        }
 
-/* Dark/Light mode toggle container */
-#mode-toggle-container {
-    max-width: 7xl;
-    margin: 1rem auto 0 auto;
-    padding: 0 1.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 1rem;
-    user-select: none;
-}
+        /* Dark/Light mode toggle container */
+        #mode-toggle-container {
+            max-width: 7xl;
+            margin: 1rem auto 0 auto;
+            padding: 0 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 1rem;
+            user-select: none;
+        }
 
-/* Icons styles */
-.mode-icon {
-    width: 28px;
-    height: 28px;
-    cursor: pointer;
-    fill: #6b7280; /* Tailwind gray-500 */
-    transition: fill 0.3s ease;
-}
+        /* Icons styles */
+        .mode-icon {
+            width: 28px;
+            height: 28px;
+            cursor: pointer;
+            fill: #6b7280;
+            /* Tailwind gray-500 */
+            transition: fill 0.3s ease;
+        }
 
-.mode-icon.active {
-    fill: #4f46e5; /* Tailwind indigo-600 */
-}
+        .mode-icon.active {
+            fill: #4f46e5;
+            /* Tailwind indigo-600 */
+        }
 
-.mode-icon:hover {
-    fill: #4338ca; /* Tailwind indigo-700 */
-}
+        .mode-icon:hover {
+            fill: #4338ca;
+            /* Tailwind indigo-700 */
+        }
 
-/* Ensure light mode icon is initially active if not in dark mode */
-body:not(.dark-mode) #lightIcon.active {
-    fill: #4f46e5; /* Tailwind indigo-600 */
-}
+        /* Ensure light mode icon is initially active if not in dark mode */
+        body:not(.dark-mode) #lightIcon.active {
+            fill: #4f46e5;
+            /* Tailwind indigo-600 */
+        }
 
 
         /* Back to Top Bar */
@@ -452,18 +649,89 @@ body:not(.dark-mode) #lightIcon.active {
 
 <body class="bg-white text-gray-800 font-sans transition-colors duration-500">
 
-    <!-- Navbar -->
-    <header class="shadow-md bg-white sticky top-0 z-50 transition-colors duration-500">
+    <!-- Add this inside <head> -->
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+
+    <header class="shadow-md bg-white sticky top-0 z-50 transition-colors duration-500 font-[Great Vibes]">
         <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-            <h1 class="text-2xl font-bold text-indigo-600">T&G</h1>
-            <nav class="space-x-6 text-gray-700 font-medium">
-                <a href="index.html" class="text-indigo-600 font-semibold">Home</a>
-                <a href="about.html" class="hover:text-indigo-500">About</a>
-                <a href="blog.html" class="hover:text-indigo-500">Blog</a>
-                <a href="contact.html" class="hover:text-indigo-500">Contact</a>
+
+            <!-- Logo -->
+            <a href="index.html" class="flex items-center text-4xl font-bold tracking-wide">
+                <span class="text-indigo-600">T</span><span class="text-gray-800">&nbsp;G</span>
+            </a>
+
+            <!-- Navigation -->
+            <nav class="space-x-6 text-gray-700 font-medium hidden md:flex">
+                <a href="index.html" class="text-indigo-600 font-semibold hover:text-indigo-500 transition">Home</a>
+                <a href="about.html" class="hover:text-indigo-500 transition">About</a>
+                <a href="blog.html" class="hover:text-indigo-500 transition">Blog</a>
+                <a href="contact.html" class="hover:text-indigo-500 transition">Contact</a>
             </nav>
+
+            <!-- Hamburger Button -->
+            <button class="hamburger-btn md:hidden" id="hamburgerBtn" aria-label="Open menu">
+                <span class="hamburger-icon"></span>
+            </button>
+
         </div>
     </header>
+
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="close-menu-btn" id="closeMenuBtn" aria-label="Close menu">
+            &times;
+        </button>
+
+        <div class="mobile-menu-content">
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="blog.html">Blog</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+
+            <div class="mobile-contact-info">
+                <h3>Get In Touch</h3>
+                <p>Have questions or want to work with us?</p>
+                <p>
+                    <a href="mailto:hello@techandgadgets.com">hello@techandgadgets.com</a>
+                </p>
+                <p>
+                    <a href="tel:+1234567890">+1 (234) 567-890</a>
+                </p>
+
+                <div class="social-links mt-6 flex justify-center gap-4">
+                    <a href="#" aria-label="Instagram" class="text-white hover:text-indigo-400 transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                        </svg>
+                    </a>
+                    <a href="#" aria-label="Twitter" class="text-white hover:text-indigo-400 transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path
+                                d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z">
+                            </path>
+                        </svg>
+                    </a>
+                    <a href="#" aria-label="LinkedIn" class="text-white hover:text-indigo-400 transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z">
+                            </path>
+                            <rect x="2" y="9" width="4" height="12"></rect>
+                            <circle cx="4" cy="4" r="2"></circle>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <!-- Hero Section with background -->
     <section id="hero" class="py-20 relative transition-filter duration-500">
@@ -479,14 +747,13 @@ body:not(.dark-mode) #lightIcon.active {
                 <span id="subtitle-strip" class="text-strip">Your future starts here. Learn, write, and inspire with our
                     beautiful platform.</span>
             </p>
-            </button id="explore-button">            
-            <a href="blog.html" 
+            </button id="explore-button">
+            <a href="blog.html"
                 class="inline-block bg-indigo-600 text-white px-6 py-3 rounded-xl shadow hover:bg-indigo-700 transition">
                 Explore Blogs
             </a>
         </div>
     </section>
-
     <!-- Features -->
     <section class="py-16 bg-white transition-colors duration-500">
         <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-3 gap-10 text-center">
@@ -512,29 +779,29 @@ body:not(.dark-mode) #lightIcon.active {
     </section>
 
     <!-- Dark/Light Mode Toggle Icons above footer, left side -->
-<div id="mode-toggle-container" aria-label="Toggle dark and light mode">
-    <!-- Sun Icon for Light Mode -->
-    <svg id="lightIcon" class="mode-icon" role="button" tabindex="0" aria-label="Switch to light mode"
-        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-        stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="12" cy="12" r="5" />
-        <line x1="12" y1="1" x2="12" y2="3" />
-        <line x1="12" y1="21" x2="12" y2="23" />
-        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
-        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
-        <line x1="1" y1="12" x2="3" y2="12" />
-        <line x1="21" y1="12" x2="23" y2="12" />
-        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
-        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
-    </svg>
+    <div id="mode-toggle-container" aria-label="Toggle dark and light mode">
+        <!-- Sun Icon for Light Mode -->
+        <svg id="lightIcon" class="mode-icon" role="button" tabindex="0" aria-label="Switch to light mode"
+            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5" />
+            <line x1="12" y1="1" x2="12" y2="3" />
+            <line x1="12" y1="21" x2="12" y2="23" />
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+            <line x1="1" y1="12" x2="3" y2="12" />
+            <line x1="21" y1="12" x2="23" y2="12" />
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+        </svg>
 
-    <!-- Moon Icon for Dark Mode -->
-    <svg id="darkIcon" class="mode-icon" role="button" tabindex="0" aria-label="Switch to dark mode"
-        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-        stroke-linecap="round" stroke-linejoin="round">
-        <path d="M21 12.79A9 9 0 0111.21 3 7 7 0 1012 21a9 9 0 009-8.21z" />
-    </svg>
-</div>
+        <!-- Moon Icon for Dark Mode -->
+        <svg id="darkIcon" class="mode-icon" role="button" tabindex="0" aria-label="Switch to dark mode"
+            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 0111.21 3 7 7 0 1012 21a9 9 0 009-8.21z" />
+        </svg>
+    </div>
 
     <!-- Back to Top Bar -->
     <div class="back-to-top-bar">
@@ -591,152 +858,202 @@ body:not(.dark-mode) #lightIcon.active {
     <!-- Hidden image for brightness detection -->
     <img id="hidden-img" crossorigin="anonymous" />
 
-<!-- Scripts -->
-<script>
-    const hero = document.getElementById("hero");
-    const titleStrip = document.getElementById("title-strip");
-    const subtitleStrip = document.getElementById("subtitle-strip");
-    const hiddenImg = document.getElementById("hidden-img");
+    <!-- Scripts -->
+    <script>
+        const hero = document.getElementById("hero");
+        const titleStrip = document.getElementById("title-strip");
+        const subtitleStrip = document.getElementById("subtitle-strip");
+        const hiddenImg = document.getElementById("hidden-img");
+        const hamburgerBtn = document.getElementById('hamburgerBtn');
+        const closeMenuBtn = document.getElementById('closeMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const hamburgerIcon = document.querySelector('.hamburger-icon');
 
-    // Array of your 5 images
-    const images = [
-    "https://images.unsplash.com/photo-1517336714731-489689fd1ca8",
-        "https://images.pexels.com/photos/18105/pexels-photo.jpg",
-        "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9",
-        "C:\Users\Administrator\Downloads\WhatsApp Image 2025-04-23 at 11.28.07 PM.jpeg", // Add image 4
-        "C:\Users\Administrator\Downloads\WhatsApp Image 2025-04-23 at 11.28.06 PM.jpeg"  // Add image 5
-    ];
+        hamburgerBtn.addEventListener('click', () => {
+            mobileMenu.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent scrolling when menu is open
+            hamburgerBtn.classList.add('is-active'); // Add class to trigger CSS transformations
+        });
 
-    let current = 0;
+        closeMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+            document.body.style.overflow = ''; // Re-enable scrolling
+            hamburgerBtn.classList.remove('is-active'); // Remove class to reset icon
+        });
+        // Close menu when clicking on a link
+        document.querySelectorAll('.mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+                document.body.style.overflow = '';
+                resetHamburgerIcon();
+            });
+        });
 
-    function updateHeroBg() {
-        const imageUrl = images[current];
-        hiddenImg.src = imageUrl;
+        function resetHamburgerIcon() {
+            hamburgerIcon.style.transform = '';
+            hamburgerIcon.style.backgroundColor = '';
+            // Note: Direct pseudo-element manipulation isn't possible in JS
+            // We'll need to toggle a class instead for the before/after states
+        }
 
-        hiddenImg.onload = () => {
-            const canvas = document.createElement("canvas");
-            canvas.width = 50;
-            canvas.height = 50;
-            const ctx = canvas.getContext("2d");
+        // For pseudo-elements, we'll use a class toggle
+        hamburgerBtn.addEventListener('click', function () {
+            this.classList.toggle('is-active');
+        });
 
-            ctx.drawImage(
-                hiddenImg,
-                hiddenImg.naturalWidth / 2 - 25,
-                hiddenImg.naturalHeight / 2 - 25,
-                50,
-                50,
-                0,
-                0,
-                50,
-                50
-            );
+        // Add this to your CSS:
+        /*
+        .hamburger-btn.is-active .hamburger-icon {
+            transform: rotate(45deg);
+            background: white;
+        }
+        .hamburger-btn.is-active .hamburger-icon::before {
+            transform: rotate(-90deg) translate(-6px, 0);
+            background: white;
+        }
+        .hamburger-btn.is-active .hamburger-icon::after {
+            opacity: 0;
+        }
+        */
 
-            const imageData = ctx.getImageData(0, 0, 50, 50).data;
+        // Array of your 5 images
+        const images = [
+            "https://images.unsplash.com/photo-1517336714731-489689fd1ca8",
+            "https://images.pexels.com/photos/18105/pexels-photo.jpg",
+            "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9",
+            "https://your-image-url-4.jpg", // Add image 4
+            "https://your-image-url-5.jpg"  // Add image 5
+        ];
 
-            let r = 0, g = 0, b = 0;
-            const totalPixels = 50 * 50;
+        let current = 0;
 
-            for (let i = 0; i < imageData.length; i += 4) {
-                r += imageData[i];
-                g += imageData[i + 1];
-                b += imageData[i + 2];
+        function updateHeroBg() {
+            const imageUrl = images[current];
+            hiddenImg.src = imageUrl;
+
+            hiddenImg.onload = () => {
+                const canvas = document.createElement("canvas");
+                canvas.width = 50;
+                canvas.height = 50;
+                const ctx = canvas.getContext("2d");
+
+                ctx.drawImage(
+                    hiddenImg,
+                    hiddenImg.naturalWidth / 2 - 25,
+                    hiddenImg.naturalHeight / 2 - 25,
+                    50,
+                    50,
+                    0,
+                    0,
+                    50,
+                    50
+                );
+
+                const imageData = ctx.getImageData(0, 0, 50, 50).data;
+
+                let r = 0, g = 0, b = 0;
+                const totalPixels = 50 * 50;
+
+                for (let i = 0; i < imageData.length; i += 4) {
+                    r += imageData[i];
+                    g += imageData[i + 1];
+                    b += imageData[i + 2];
+                }
+
+                r /= totalPixels;
+                g /= totalPixels;
+                b /= totalPixels;
+
+                const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+
+                const overlayColor = brightness > 150
+                    ? "rgba(0, 0, 0, 0.6)"
+                    : "rgba(255, 255, 255, 0.6)";
+                hero.style.backgroundImage = `url(${imageUrl})`;
+                titleStrip.style.backgroundColor = overlayColor;
+                subtitleStrip.style.backgroundColor = overlayColor;
+
+                current = (current + 1) % images.length;
+            };
+        }
+
+        // Update icon active state
+        function updateIconState() {
+            if (body.classList.contains('dark-mode')) {
+                darkIcon.classList.add('active');
+                lightIcon.classList.remove('active');
+            } else {
+                lightIcon.classList.add('active');
+                darkIcon.classList.remove('active');
             }
-
-            r /= totalPixels;
-            g /= totalPixels;
-            b /= totalPixels;
-
-            const brightness = (r * 299 + g * 587 + b * 114) / 1000;
-
-            const overlayColor = brightness > 150
-                ? "rgba(0, 0, 0, 0.6)"
-                : "rgba(255, 255, 255, 0.6)";
-
-            hero.style.backgroundImage = `url(${imageUrl})`;
-            titleStrip.style.backgroundColor = overlayColor;
-            subtitleStrip.style.backgroundColor = overlayColor;
-
-            current = (current + 1) % images.length;
-        };
-    }
-
-    // Update icon active state
-    function updateIconState() {
-        if (body.classList.contains('dark-mode')) {
-            darkIcon.classList.add('active');
-            lightIcon.classList.remove('active');
-        } else {
-            lightIcon.classList.add('active');
-            darkIcon.classList.remove('active');
-        }
-    }
-
-    // Get the dark and light mode toggle elements
-    const lightIcon = document.getElementById('lightIcon');
-    const darkIcon = document.getElementById('darkIcon');
-    const body = document.body;
-
-    // Function to toggle dark mode
-    function toggleDarkMode(enableDark) {
-        if (enableDark) {
-            body.classList.add('dark-mode');
-            localStorage.setItem('mode', 'dark');
-        } else {
-            body.classList.remove('dark-mode');
-            localStorage.setItem('mode', 'light');
-        }
-        updateIconState();
-    }
-
-    // Update the icon state based on dark mode
-    function updateIconState() {
-        if (body.classList.contains('dark-mode')) {
-            darkIcon.classList.add('active');
-            lightIcon.classList.remove('active');
-        } else {
-            lightIcon.classList.add('active');
-            darkIcon.classList.remove('active');
-        }
-    }
-
-    // Load saved mode from localStorage or default to light mode
-    window.onload = () => {
-        // Load saved mode or default to light mode
-        const savedMode = localStorage.getItem('mode');
-        if (savedMode === 'dark') {
-            toggleDarkMode(true);
-        } else {
-            toggleDarkMode(false);
         }
 
-        // Event listeners for dark/light mode toggle buttons
-        lightIcon.addEventListener('click', () => toggleDarkMode(false));
-        darkIcon.addEventListener('click', () => toggleDarkMode(true));
+        // Get the dark and light mode toggle elements
+        const lightIcon = document.getElementById('lightIcon');
+        const darkIcon = document.getElementById('darkIcon');
+        const body = document.body;
 
-        // Add keyboard accessibility for dark mode toggle
-        lightIcon.addEventListener('keydown', e => {
-            if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
+        // Function to toggle dark mode
+        function toggleDarkMode(enableDark) {
+            if (enableDark) {
+                body.classList.add('dark-mode');
+                localStorage.setItem('mode', 'dark');
+            } else {
+                body.classList.remove('dark-mode');
+                localStorage.setItem('mode', 'light');
+            }
+            updateIconState();
+        }
+
+        // Update the icon state based on dark mode
+        function updateIconState() {
+            if (body.classList.contains('dark-mode')) {
+                darkIcon.classList.add('active');
+                lightIcon.classList.remove('active');
+            } else {
+                lightIcon.classList.add('active');
+                darkIcon.classList.remove('active');
+            }
+        }
+
+        // Load saved mode from localStorage or default to light mode
+        window.onload = () => {
+            // Load saved mode or default to light mode
+            const savedMode = localStorage.getItem('mode');
+            if (savedMode === 'dark') {
+                toggleDarkMode(true);
+            } else {
                 toggleDarkMode(false);
             }
-        });
 
-        darkIcon.addEventListener('keydown', e => {
-            if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                toggleDarkMode(true);
-            }
-        });
+            // Event listeners for dark/light mode toggle buttons
+            lightIcon.addEventListener('click', () => toggleDarkMode(false));
+            darkIcon.addEventListener('click', () => toggleDarkMode(true));
 
-        // Start the hero background image cycling
-        setInterval(updateHeroBg, 5000); // Update every 5 seconds
+            // Add keyboard accessibility for dark mode toggle
+            lightIcon.addEventListener('keydown', e => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    toggleDarkMode(false);
+                }
+            });
 
-        // Back to top button
-        document.getElementById('backToTop').onclick = function () {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            darkIcon.addEventListener('keydown', e => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    toggleDarkMode(true);
+                }
+            });
+
+            // Start the hero background image cycling
+            setInterval(updateHeroBg, 5000); // Update every 5 seconds
+
+            // Back to top button
+            document.getElementById('backToTop').onclick = function () {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            };
         };
-    };
-</script>
+    </script>
 
 
 </body>

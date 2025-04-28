@@ -6,11 +6,119 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Blog — BlogWeb</title>
     <link href="output.css" rel="stylesheet" />
+    <style>
+        /* Style for the modal/popup */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 10;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 10% auto;  /* Changed from 15% to 10% */
+            padding: 20px;
+            border: 1px solid #888;
+            width: auto;      /* Changed from 80% to auto */
+            max-width: 400px;  /* Added max-width */
+            border-radius: 8px;
+            position: relative;
+            display: flex;      /* Added flex display */
+            flex-direction: column; /* Added flex direction column */
+            align-items: center;  /* Added align items center */
+        }
+
+        .close-button {
+            color: #aaa;
+            position: absolute; /* Changed position to absolute */
+            top: 0;            /* Positioned at the top */
+            right: 0;          /* Positioned at the right */
+            padding: 10px;      /* Added padding for better click area */
+            cursor: pointer;      /* Added cursor style */
+            font-size: 28px;
+            font-weight: bold;
+            line-height: 1;      /* Added line height to vertically center */
+        }
+
+        .close-button:hover,
+        .close-button:focus {
+            color: black;
+            text-decoration: none;
+        }
+
+        .modal-content h2 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .modal-content p {
+            color: #555;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            width: 100%; /* Make buttons container take full width */
+        }
+
+        .modal-buttons a,
+        .modal-buttons button {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: medium;
+            transition: background-color 0.2s ease;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+            width: auto;    /* Changed width to auto */
+        }
+
+        .modal-buttons .sign-in {
+            background-color: #6366f1;
+            color: white;
+        }
+
+        .modal-buttons .sign-in:hover {
+            background-color: #4f46e5;
+        }
+
+        .modal-buttons .close {
+            background-color: #ddd;
+            color: #333;
+        }
+
+        .modal-buttons .close:hover {
+            background-color: #ccc;
+        }
+    </style>
 </head>
 
 <body class="bg-white text-gray-800 font-sans">
 
-    <!-- Navbar -->
+    <div id="signInModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeSignInModal()">&times;</span>
+            <h2>Sign In Required</h2>
+            <p>You need to sign in to read the full blog post.</p>
+            <div class="modal-buttons">
+                <a href="signup.html" class="sign-in">Sign In</a>
+                <button onclick="closeSignInModal()" class="close">Close</button>
+            </div>
+        </div>
+    </div>
+
     <header class="shadow-md bg-white sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
             <h1 class="text-2xl font-bold text-indigo-600">BW</h1>
@@ -23,25 +131,22 @@
         </div>
     </header>
 
-    <!-- Blog Posts -->
     <section class="py-16 px-6 bg-gray-50">
         <div class="max-w-6xl mx-auto">
             <h2 class="text-4xl font-bold text-center text-indigo-700 mb-12">Latest Blogs</h2>
             <div class="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
 
-                <!-- Blog Card 1 -->
                 <div class="bg-white shadow rounded-xl overflow-hidden">
                     <img src="https://picsum.photos/600/400?random=5" alt="Random Image"
-                        class="w-full h-48 object-cover">
+                        class="w-full h-48 object-cover">
                     <div class="p-6">
                         <h3 class="text-xl font-semibold text-indigo-600 mb-2">Mastering Laravel: Beginner to Pro</h3>
                         <p class="text-gray-600 text-sm mb-4">Learn the fundamentals of Laravel and start building
                             real-world applications today.</p>
-                        <a href="post.html" class="text-indigo-500 hover:underline text-sm font-medium">Read More →</a>
+                        <a href="#" onclick="openSignInModal()" class="text-indigo-500 hover:underline text-sm font-medium">Read More →</a>
                     </div>
                 </div>
 
-                <!-- Blog Card 2 -->
                 <div class="bg-white shadow rounded-xl overflow-hidden">
                     <img src="https://picsum.photos/600/400?random=4" alt="Random Image"
                         class="w-full h-48 object-cover">
@@ -50,11 +155,10 @@
                         <h3 class="text-xl font-semibold text-indigo-600 mb-2">Why Blogging Still Matters in 2025</h3>
                         <p class="text-gray-600 text-sm mb-4">Blogging continues to be a powerful medium. Here’s why you
                             should start today.</p>
-                        <a href="post.html" class="text-indigo-500 hover:underline text-sm font-medium">Read More →</a>
+                        <a href="#" onclick="openSignInModal()" class="text-indigo-500 hover:underline text-sm font-medium">Read More →</a>
                     </div>
                 </div>
 
-                <!-- Blog Card 3 -->
                 <div class="bg-white shadow rounded-xl overflow-hidden">
                     <img src="https://picsum.photos/600/400?random=3" alt="Random Image"
                         class="w-full h-48 object-cover">
@@ -62,7 +166,7 @@
                         <h3 class="text-xl font-semibold text-indigo-600 mb-2">Top 5 Web Development Trends</h3>
                         <p class="text-gray-600 text-sm mb-4">Stay ahead of the curve with these game-changing trends in
                             the dev world.</p>
-                        <a href="post.html" class="text-indigo-500 hover:underline text-sm font-medium">Read More →</a>
+                        <a href="#" onclick="openSignInModal()" class="text-indigo-500 hover:underline text-sm font-medium">Read More →</a>
                     </div>
                 </div>
 
@@ -70,12 +174,33 @@
         </div>
     </section>
 
-    <!-- Footer -->
     <footer class="bg-gray-100 py-6 mt-10">
         <div class="text-center text-gray-600 text-sm">
             © 2025 BlogWeb. Made with love by Hania Khan.
         </div>
     </footer>
+
+    <script>
+        // Get the modal
+        var modal = document.getElementById("signInModal");
+
+        // Function to open the modal
+        function openSignInModal() {
+            modal.style.display = "block";
+        }
+
+        // Function to close the modal
+        function closeSignInModal() {
+            modal.style.display = "none";
+        }
+
+        // Close the modal if the user clicks outside of it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                closeSignInModal();
+            }
+        }
+    </script>
 </body>
 
 </html>
