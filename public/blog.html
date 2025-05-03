@@ -22,28 +22,40 @@
 
         .modal-content {
             background-color: #fefefe;
-            margin: 10% auto;  /* Changed from 15% to 10% */
+            margin: 10% auto;
+            /* Changed from 15% to 10% */
             padding: 20px;
             border: 1px solid #888;
-            width: auto;      /* Changed from 80% to auto */
-            max-width: 400px;  /* Added max-width */
+            width: auto;
+            /* Changed from 80% to auto */
+            max-width: 400px;
+            /* Added max-width */
             border-radius: 8px;
             position: relative;
-            display: flex;      /* Added flex display */
-            flex-direction: column; /* Added flex direction column */
-            align-items: center;  /* Added align items center */
+            display: flex;
+            /* Added flex display */
+            flex-direction: column;
+            /* Added flex direction column */
+            align-items: center;
+            /* Added align items center */
         }
 
         .close-button {
             color: #aaa;
-            position: absolute; /* Changed position to absolute */
-            top: 0;            /* Positioned at the top */
-            right: 0;          /* Positioned at the right */
-            padding: 10px;      /* Added padding for better click area */
-            cursor: pointer;      /* Added cursor style */
+            position: absolute;
+            /* Changed position to absolute */
+            top: 0;
+            /* Positioned at the top */
+            right: 0;
+            /* Positioned at the right */
+            padding: 10px;
+            /* Added padding for better click area */
+            cursor: pointer;
+            /* Added cursor style */
             font-size: 28px;
             font-weight: bold;
-            line-height: 1;      /* Added line height to vertically center */
+            line-height: 1;
+            /* Added line height to vertically center */
         }
 
         .close-button:hover,
@@ -68,7 +80,8 @@
             display: flex;
             justify-content: center;
             gap: 1rem;
-            width: 100%; /* Make buttons container take full width */
+            width: 100%;
+            /* Make buttons container take full width */
         }
 
         .modal-buttons a,
@@ -82,7 +95,8 @@
             border: none;
             cursor: pointer;
             text-align: center;
-            width: auto;    /* Changed width to auto */
+            width: auto;
+            /* Changed width to auto */
         }
 
         .modal-buttons .sign-in {
@@ -143,7 +157,8 @@
                         <h3 class="text-xl font-semibold text-indigo-600 mb-2">Mastering Laravel: Beginner to Pro</h3>
                         <p class="text-gray-600 text-sm mb-4">Learn the fundamentals of Laravel and start building
                             real-world applications today.</p>
-                        <a href="#" onclick="openSignInModal()" class="text-indigo-500 hover:underline text-sm font-medium">Read More →</a>
+                        <a href="#" onclick="openSignInModal()"
+                            class="text-indigo-500 hover:underline text-sm font-medium">Read More →</a>
                     </div>
                 </div>
 
@@ -155,7 +170,8 @@
                         <h3 class="text-xl font-semibold text-indigo-600 mb-2">Why Blogging Still Matters in 2025</h3>
                         <p class="text-gray-600 text-sm mb-4">Blogging continues to be a powerful medium. Here’s why you
                             should start today.</p>
-                        <a href="#" onclick="openSignInModal()" class="text-indigo-500 hover:underline text-sm font-medium">Read More →</a>
+                        <a href="#" onclick="openSignInModal()"
+                            class="text-indigo-500 hover:underline text-sm font-medium">Read More →</a>
                     </div>
                 </div>
 
@@ -166,7 +182,8 @@
                         <h3 class="text-xl font-semibold text-indigo-600 mb-2">Top 5 Web Development Trends</h3>
                         <p class="text-gray-600 text-sm mb-4">Stay ahead of the curve with these game-changing trends in
                             the dev world.</p>
-                        <a href="#" onclick="openSignInModal()" class="text-indigo-500 hover:underline text-sm font-medium">Read More →</a>
+                        <a href="#" onclick="openSignInModal()"
+                            class="text-indigo-500 hover:underline text-sm font-medium">Read More →</a>
                     </div>
                 </div>
 
@@ -174,12 +191,55 @@
         </div>
     </section>
 
-    <footer class="bg-gray-100 py-6 mt-10">
-        <div class="text-center text-gray-600 text-sm">
-            © 2025 BlogWeb. Made with love by Hania Khan.
+    <footer class="bg-gray-900 py-12 mt-20 border-t border-gray-800">
+        <div class="max-w-5xl mx-auto px-6">
+            <div class="text-center">
+                <!-- Logo/Brand -->
+                <div class="mb-6">
+                    <span class="text-2xl font-bold text-white">BlogWeb</span>
+                    <span class="text-xs text-gray-500 block mt-1">TECHNOLOGY & INNOVATION</span>
+                </div>
+
+                <!-- Founders Highlight -->
+                <div class="relative inline-block mb-8 group">
+                    <span class="text-gray-400">Created by </span>
+                    <span class="font-medium italic text-white bg-clip-text text-transparent 
+                              bg-gradient-to-r from-blue-400 to-blue-300 transition-all duration-300
+                              hover:from-purple-400 hover:to-pink-400">
+                        Hania Khan
+                    </span>
+                    <span class="text-gray-400"> and </span>
+                    <span class="font-medium italic text-white bg-clip-text text-transparent 
+                              bg-gradient-to-r from-purple-400 to-pink-400 transition-all duration-300
+                              hover:from-blue-400 hover:to-blue-300">
+                        Noor Fatima
+                    </span>
+                </div>
+
+                <!-- Copyright -->
+                <div class="text-gray-500 text-sm mb-6">
+                    © 2025 BlogWeb. All rights reserved.
+                </div>
+
+                <!-- Mission Statement -->
+                <div class="max-w-2xl mx-auto text-gray-400 text-sm italic leading-relaxed">
+                    Dedicated to empowering voices through accessible and impactful digital storytelling
+                    in the technology space.
+                </div>
+
+                <!-- Minimal divider -->
+                <div class="mt-8 mb-6 mx-auto w-24 h-px bg-gradient-to-r from-transparent via-gray-700 to-transparent">
+                </div>
+
+                <!-- Legal links -->
+                <div class="flex justify-center space-x-6 text-xs">
+                    <a href="#" class="text-gray-500 hover:text-blue-400 transition">Privacy</a>
+                    <a href="#" class="text-gray-500 hover:text-blue-400 transition">Terms</a>
+                    <a href="#" class="text-gray-500 hover:text-blue-400 transition">Contact</a>
+                </div>
+            </div>
         </div>
     </footer>
-
     <script>
         // Get the modal
         var modal = document.getElementById("signInModal");
@@ -195,7 +255,7 @@
         }
 
         // Close the modal if the user clicks outside of it
-        window.onclick = function(event) {
+        window.onclick = function (event) {
             if (event.target == modal) {
                 closeSignInModal();
             }

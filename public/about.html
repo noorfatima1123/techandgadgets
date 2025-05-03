@@ -5,7 +5,110 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>About — BlogWeb</title>
-    <link href="output.css" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .card-stack {
+            height: 220px;
+            position: relative;
+            margin: 3rem auto;
+            width: 90%;
+            max-width: 600px;
+        }
+
+        .card {
+            position: absolute;
+            width: 100%;
+            transition: all 0.7s ease-out;
+            cursor: pointer;
+            border-radius: 12px;
+            padding: 1.75rem 2rem;
+            text-align: center;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+
+        /* Card colors */
+        .card:nth-child(1) {
+            background: linear-gradient(135deg, #6e48aa 0%, #9d50bb 100%);
+        }
+
+        .card:nth-child(2) {
+            background: linear-gradient(135deg, #4776E6 0%, #8E54E9 100%);
+        }
+
+        .card:nth-child(3) {
+            background: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);
+        }
+
+        .card:nth-child(4) {
+            background: linear-gradient(135deg, #1A2980 0%, #26D0CE 100%);
+        }
+
+        .card:nth-child(5) {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+        }
+
+        /* Initial stack positions */
+        .card:nth-child(1) {
+            transform: translateY(0) rotate(0deg);
+            z-index: 5;
+        }
+
+        .card:nth-child(2) {
+            transform: translateY(8px) rotate(-1deg);
+            z-index: 4;
+        }
+
+        .card:nth-child(3) {
+            transform: translateY(16px) rotate(2deg);
+            z-index: 3;
+        }
+
+        .card:nth-child(4) {
+            transform: translateY(24px) rotate(-1deg);
+            z-index: 2;
+        }
+
+        .card:nth-child(5) {
+            transform: translateY(32px) rotate(1deg);
+            z-index: 1;
+        }
+
+        /* Animation classes */
+        .fly-up {
+            transform: translateY(-100vh) rotate(-5deg) !important;
+            opacity: 0;
+        }
+
+        .fly-left {
+            transform: translateX(-100vw) rotate(-15deg) !important;
+            opacity: 0;
+        }
+
+        .fly-right {
+            transform: translateX(100vw) rotate(15deg) !important;
+            opacity: 0;
+        }
+
+        .fly-down {
+            transform: translateY(100vh) rotate(5deg) !important;
+            opacity: 0;
+        }
+
+        .card-content {
+            font-weight: 600;
+            font-size: 1.3rem;
+            margin-bottom: 0.6rem;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-subtext {
+            opacity: 0.85;
+            font-size: 0.9rem;
+            letter-spacing: 0.3px;
+        }
+    </style>
 </head>
 
 <body class="bg-white text-gray-800 font-sans">
@@ -13,7 +116,11 @@
     <!-- Navbar -->
     <header class="shadow-md bg-white sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-            <h1 class="text-2xl font-bold text-indigo-600">BW</h1>
+            <!-- Logo -->
+            <a href="index.html" class="flex items-center text-4xl font-bold tracking-wide">
+                <span class="text-indigo-600">T</span><span class="text-gray-800">&nbsp;G</span>
+            </a>
+
             <nav class="space-x-6 text-gray-700 font-medium">
                 <a href="index.html" class="hover:text-indigo-500">Home</a>
                 <a href="about.html" class="hover:text-indigo-500">About</a>
@@ -24,41 +131,129 @@
     </header>
 
     <!-- About Section -->
-    <section class="py-20 px-6 bg-gradient-to-r from-indigo-100 to-blue-100">
+    <section class="py-20 px-6 bg-gradient-to-r from-indigo-50 to-blue-50">
         <div class="max-w-4xl mx-auto text-center">
-            <h2 class="text-4xl md:text-5xl font-bold text-indigo-700 mb-4">About BlogWeb</h2>
+            <h2 class="text-4xl md:text-5xl font-bold text-indigo-700 mb-4">Powering the Tech Platform</h2>
             <p class="text-lg text-gray-700 mb-6">
-                BlogWeb is your digital journal. Whether you're here to share your story,
-                teach, or simply express yourself, our platform gives you the tools to
-                connect with a wider audience and make an impact.
+                At BlogWeb, we believe every voice holds value. Whether you're a curious reader or an emerging writer,
+                your words can shape minds and spark change.
             </p>
             <p class="text-md text-gray-600">
-                Created with passion and purpose, BlogWeb aims to empower writers, thinkers,
-                and creators from all walks of life. We believe in the power of words, and
-                that every voice deserves to be heard.
+                Built by two self-driven creators with big dreams and limited means —
+                BlogWeb is our leap into the digital world, crafted to elevate tech discussions, honest reviews, and
+                fresh perspectives.
             </p>
         </div>
     </section>
 
-    <!-- Team or Mission -->
-    <section class="py-16 bg-white">
-        <div class="max-w-6xl mx-auto px-6 text-center">
-            <h3 class="text-3xl font-semibold text-indigo-600 mb-4">Our Mission</h3>
-            <p class="text-gray-700 max-w-3xl mx-auto">
-                To build a beautiful space where knowledge meets creativity. We’re here
-                to spark conversations, provide opportunities, and create a supportive
-                blogging ecosystem for everyone.
+    <!-- Interactive Card Stack -->
+    <div class="max-w-2xl mx-auto px-6 relative z-10">
+        <div class="card-stack">
+            <div class="card">
+                <div class="card-content">"Tech made personal"</div>
+                <div class="card-subtext">Click to explore our vision</div>
+            </div>
+            <div class="card">
+                <div class="card-content">"Powerful insights"</div>
+                <div class="card-subtext">Click to discover more</div>
+            </div>
+            <div class="card">
+                <div class="card-content">"Possible for everyone"</div>
+                <div class="card-subtext">Click to see how</div>
+            </div>
+            <div class="card">
+                <div class="card-content">"From small beginnings"</div>
+                <div class="card-subtext">Click to learn our story</div>
+            </div>
+            <div class="card">
+                <div class="card-content">"To a growing platform"</div>
+                <div class="card-subtext">Click to join us</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Meet the Founders Section -->
+    <section class="bg-gray-50 py-12 mt-24">
+        <div class="max-w-5xl mx-auto px-6 text-center">
+            <h3 class="text-3xl font-semibold text-indigo-600 mb-6">Meet the Founders</h3>
+            <p class="text-gray-700 mb-8">
+                Behind BlogWeb are two passionate creators dedicated to tech, gadgets, and empowering digital readers.
+                As we grow, so does our commitment to quality content and professional excellence.
             </p>
+            <div class="flex justify-center gap-10 flex-wrap">
+                <!-- Hania -->
+                <div class="text-center">
+                    <a href="https://www.linkedin.com/in/hania-khan-0a83762a0/" target="_blank"
+                        class="inline-block px-6 py-3 rounded-xl text-white bg-gradient-to-r from-blue-600 to-blue-700 shadow-lg hover:shadow-xl hover:scale-105 transform transition duration-300 font-semibold text-sm">
+                        Connect with Hania Khan
+                    </a>
+                </div>
+                <!-- Noor -->
+                <div class="text-center">
+                    <a href="https://www.noor-fatima" target="_blank"
+                        class="inline-block px-6 py-3 rounded-xl text-white bg-gradient-to-r from-blue-600 to-blue-700 shadow-lg hover:shadow-xl hover:scale-105 transform transition duration-300 font-semibold text-sm">
+                        Connect with Noor Fatima
+                    </a>
+                </div>
+            </div>
         </div>
     </section>
+
 
     <!-- Footer -->
     <footer class="bg-gray-100 py-6 mt-10">
         <div class="text-center text-gray-600 text-sm">
-            © 2025 BlogWeb. Made with love by Hania Khan and Noor Fatima.
+            © 2025 BlogWeb.All rights reserved. <br> A platform developed and maintained by --Hania Khan and Noor
+            Fatima--<br>
+            dedicated to empowering voices through accessible and impactful digital storytelling.
         </div>
     </footer>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const cards = document.querySelectorAll('.card');
+            const animations = ['fly-up', 'fly-left', 'fly-right', 'fly-down'];
+            let currentAnimIndex = 0;
+
+            cards.forEach(card => {
+                card.addEventListener('click', function () {
+                    // Apply current animation
+                    const currentAnim = animations[currentAnimIndex];
+                    card.classList.add(currentAnim);
+
+                    // Move to next animation in sequence
+                    currentAnimIndex = (currentAnimIndex + 1) % animations.length;
+
+                    // After animation completes
+                    setTimeout(() => {
+                        // Remove animation class
+                        card.classList.remove(currentAnim);
+
+                        // Move card to bottom of stack
+                        card.style.zIndex = 0;
+                        card.parentNode.appendChild(card);
+
+                        // Reset all card positions and z-index
+                        resetCardStack();
+                    }, 700);
+                });
+            });
+
+            function resetCardStack() {
+                const cards = document.querySelectorAll('.card');
+                cards.forEach((card, index) => {
+                    card.style.zIndex = cards.length - index;
+                    if (index > 0) {
+                        const angle = index % 2 === 0 ? index : -index;
+                        card.style.transform = `translateY(${index * 8}px) rotate(${angle}deg)`;
+                    } else {
+                        card.style.transform = 'translateY(0) rotate(0deg)';
+                    }
+                    card.style.opacity = '1';
+                });
+            }
+        });
+    </script>
 </body>
 
 </html>
